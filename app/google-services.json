@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "336332508359",
+    "firebase_url": "https://tablebookingapp.firebaseio.com",
+    "project_id": "tablebookingapp",
+    "storage_bucket": "tablebookingapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336332508359:android:74716cc8701615d6",
+        "android_client_info": {
+          "package_name": "com.example.android.tablebookingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336332508359-5rm1o6jl58g5q3ro0eupuovfh7e53brr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.tablebookingapp",
+            "certificate_hash": "87923E0C807BF7CB2DDB51EB676C29CCB9691507"
+          }
+        },
+        {
+          "client_id": "336332508359-hpp407508ulpotq2j0u42l7fcb3pr253.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADrKUhEDjwgLNgk3Os-I_R3v_vTlWssDc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336332508359-hpp407508ulpotq2j0u42l7fcb3pr253.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
