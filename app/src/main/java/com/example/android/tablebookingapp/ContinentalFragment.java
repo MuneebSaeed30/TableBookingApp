@@ -32,8 +32,8 @@ public class ContinentalFragment extends Fragment {
         recyclerView= (RecyclerView) v.findViewById(R.id.FoodMenu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager( new LinearLayoutManager(this.getContext()));
-        Menu1Adapter menu1Adapter= new Menu1Adapter(menu,this.getContext());
-        recyclerView.setAdapter(menu1Adapter);
+        ItemsAdapter itemsAdapter = new ItemsAdapter(menu, this.getContext());
+        recyclerView.setAdapter(itemsAdapter);
 
         int[] covers = new int[]{
                 R.drawable.mhandi,

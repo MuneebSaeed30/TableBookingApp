@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Menu1Fragment extends Fragment implements RecyclerView.OnItemTouchListener {
+public class Menu1Fragment extends Fragment  {
 
     private RecyclerView recyclerView;
     private List<com.example.android.tablebookingapp.Menu>  menu= new ArrayList<>();
@@ -64,60 +63,8 @@ public class Menu1Fragment extends Fragment implements RecyclerView.OnItemTouchL
     }
 
 
-    @Override
-    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-    return  false;
-    }
 
-    @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-    }
-
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-    }
 }
 
 
-
-       /*
-            @Override
-            public void onClick(View view, final int position) {
-
-
-
-                if (i== 0){
-                    ContinentalFragment continentalFragment = new ContinentalFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout, continentalFragment, continentalFragment.getTag()).commit();
-                }
-                if (i== 1){
-                    BbqFragment bbqFragment = new BbqFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout, bbqFragment , bbqFragment .getTag()).commit();
-                }
-                if (i== 2){
-                    ChineseFragment chineseFragment = new ChineseFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout, chineseFragment, chineseFragment.getTag()).commit();
-                }
-                if (i== 3){
-                    ItalianFragment  italianFragment = new  ItalianFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout,  italianFragment,  italianFragment.getTag()).commit();
-                }
-                if (i== 4){
-                    FastfoodFragment fastfoodFragment = new FastfoodFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout, fastfoodFragment, fastfoodFragment.getTag()).commit();
-                }
-
-            }
-        }));
-
-
-
-*/
 
