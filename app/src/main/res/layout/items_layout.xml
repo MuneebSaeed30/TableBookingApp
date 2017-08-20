@@ -74,18 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Rs-"
-                android:id="@+id/textView2"
-                android:layout_alignBottom="@+id/item_image"
-                android:layout_alignLeft="@+id/item_desc"
-                android:layout_alignStart="@+id/item_desc" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="100"
-                android:id="@+id/price"
+                android:id="@+id/item_price"
                 android:layout_alignTop="@+id/textView2"
                 android:layout_toRightOf="@+id/textView2"
                 android:layout_toEndOf="@+id/textView2" />
@@ -139,6 +129,16 @@
 
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Rs."
+                android:id="@+id/textView2"
+                android:layout_alignTop="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/item_desc"
+                android:layout_alignStart="@+id/item_desc" />
 
 
         </RelativeLayout>

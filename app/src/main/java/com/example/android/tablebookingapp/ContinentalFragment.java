@@ -43,22 +43,23 @@ public class ContinentalFragment extends Fragment {
                 R.drawable.mkarahi};
 
 
-        Menu c1= new Menu("Makhni Handi","Handi, Karahi, Rogni Naan..",covers[0]);
+        Menu c1= new Menu("Makhni Handi","Handi, Karahi, Rogni Naan..",covers[0], 1200);
         menu.add(c1);
 
-        Menu c2= new Menu("Brain Masala","Chargha, Tikka, Seekh Kabab..",covers[1]);
+        Menu c2= new Menu("Brain Masala","Chargha, Tikka, Seekh Kabab..",covers[1], 550);
         menu.add(c2);
 
-        Menu c3= new Menu("Liver","Chowmein, Singaporian Rice..",covers[2]);
+        Menu c3= new Menu("Liver","Chowmein, Singaporian Rice..",covers[2], 400);
         menu.add(c3);
 
-        Menu c4= new Menu("Paneeri Reshmi Handi","Pizza, Lasagne..",covers[3]);
+        Menu c4= new Menu("Paneeri Reshmi Handi","Pizza, Lasagne..",covers[3], 1200);
         menu.add(c4);
 
-        Menu c5= new Menu("Karahi","Beef Cheese Burger, Zinger Stacker..",covers[4]);
+        Menu c5= new Menu("Karahi","Beef Cheese Burger, Zinger Stacker..",covers[4], 1000);
         menu.add(c5);
 
         return v;
     }
+
 
 }

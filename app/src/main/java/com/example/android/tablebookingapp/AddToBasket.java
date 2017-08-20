@@ -6,21 +6,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AddToBasket extends Fragment {
+    private ListView lv;
+    private ArrayList<Menu> menu= new ArrayList<>();
+    private ArrayAdapter arrayAdapter;
+    private TextView item, itemquantity,itemprice;
 
-    private TextView mesg;
-    private Button checkout;
+
 
 
     public AddToBasket() {
-        // Required empty public constructor
     }
 
 
@@ -29,17 +30,18 @@ public class AddToBasket extends Fragment {
                              Bundle savedInstanceState) {
          View v=inflater.inflate(R.layout.fragment_add_to_basket, container, false);
 
-        mesg= (TextView) v.findViewById(R.id.msg);
-        checkout= (Button) v.findViewById(R.id.checkout);
-        checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mesg.setText("Checked Out");
-            }
-        });
+        Bundle bundle1= getArguments();
+        String itemname=bundle1.getString("item");
+        int itemquan=bundle1.getInt("itemquantity");
+        int  itemrs=bundle1.getInt("itemprice");
 
 
 
+        lv= (ListView) v.findViewById(R.id.lv);
+        Menu c1= new Menu(itemname,itemquan,itemrs);
+        menu.add(c1);
+
+        lv.setAdapter(new BasketAdapter(this.getContext(),menu));
         return v;
     }
 

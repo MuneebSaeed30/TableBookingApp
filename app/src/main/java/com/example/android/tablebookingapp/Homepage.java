@@ -100,12 +100,12 @@ public class Homepage extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
 
-            if(getFragmentManager().getBackStackEntryCount() > 0){
+            /*if(getFragmentManager().getBackStackEntryCount() > 0){
                 getFragmentManager().popBackStackImmediate();
             }
             else{
                 super.onBackPressed();
-            }
+            }*/
 
         } else {
             super.onBackPressed();
@@ -126,12 +126,11 @@ public class Homepage extends AppCompatActivity
             manager.beginTransaction().replace(R.id.content_layout, menu1Fragment, menu1Fragment.getTag())
                     .addToBackStack(null)
                     .commit();
-
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            BbqFragment bbqFragment = new BbqFragment();
+            SeatFragment seatFragment = new SeatFragment();
             FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_layout, bbqFragment , bbqFragment .getTag()).commit();
+            manager.beginTransaction().replace(R.id.content_layout, seatFragment , seatFragment.getTag()).commit();
 
 
         } else if (id == R.id.nav_slideshow) {

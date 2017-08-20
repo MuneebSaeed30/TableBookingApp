@@ -44,23 +44,29 @@ public class BbqFragment extends Fragment {
                 R.drawable.roll };
 
 
-        Menu c1= new Menu("Chicken Tikka","Handi, Karahi, Rogni Naan..",covers[0]);
+        Menu c1= new Menu("Chicken Tikka","Handi, Karahi, Rogni Naan..",covers[0], 1200);
         menu.add(c1);
 
-        Menu c2= new Menu("Malai Boti","Chargha, Tikka, Seekh Kabab..",covers[1]);
+        Menu c2= new Menu("Malai Boti","Chargha, Tikka, Seekh Kabab..",covers[1],1200);
         menu.add(c2);
 
-        Menu c3= new Menu("Reshmi Kabab","Chowmein, Singaporian Rice..",covers[2]);
+        Menu c3= new Menu("Reshmi Kabab","Chowmein, Singaporian Rice..",covers[2], 1200);
         menu.add(c3);
 
-        Menu c4= new Menu("Chargha","Pizza, Lasagne..",covers[3]);
+        Menu c4= new Menu("Chargha","Pizza, Lasagne..",covers[3], 1200);
         menu.add(c4);
 
-        Menu c5= new Menu("Beef Roll","Beef Cheese Burger, Zinger Stacker..",covers[4]);
+        Menu c5= new Menu("Beef Roll","Beef Cheese Burger, Zinger Stacker..",covers[4], 1200);
         menu.add(c5);
 
 
         return v;
     }
 
+
+
+
+
+
 }
+
