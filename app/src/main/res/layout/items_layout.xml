@@ -68,7 +68,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:clickable="true" />
+                android:clickable="true"
+                android:onClick="addItem" />
 
             <TextView
                 android:layout_width="wrap_content"

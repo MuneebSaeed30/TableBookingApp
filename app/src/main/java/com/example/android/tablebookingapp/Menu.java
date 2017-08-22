@@ -27,7 +27,7 @@ public class Menu {
         this.price = price;
     }
 
-    public Menu(String name, int price, int quantity) {
+    public Menu(String name , int quantity, int price) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

@@ -15,18 +15,24 @@ public class BasketAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private ArrayList<Menu> menu= new ArrayList<>();
-    private TextView item, itemquantity,itemprice;
     private Context context;
+
+    public BasketAdapter(Context context) {
+        this.context = context;
+    }
 
     public BasketAdapter(Context context , ArrayList<Menu> menu) {
 
         this.context= context;
-        inflater = LayoutInflater.from(context);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.menu = menu;
     }
 
     public BasketAdapter() {
     }
+
+
+
 
 
 
@@ -51,19 +57,28 @@ public class BasketAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
         View v=convertView;
-        if(convertView==null)
+        ViewHolder holder;
+        if(convertView==null) {
+            holder= new ViewHolder();
             v = inflater.inflate(R.layout.layout_add_to_basket, null);
+            holder.item =(TextView) v.findViewById(R.id.itm);
+            holder.itemquantity =(TextView) v.findViewById(R.id.quan);
+            holder.itemprice =(TextView) v.findViewById(R.id.rs);
+            v.setTag(holder);
+        }else{
+            holder = (ViewHolder) v.getTag();
+        }
 
-        item =(TextView) v.findViewById(R.id.itm);
-        itemquantity =(TextView) v.findViewById(R.id.quan);
-        itemprice =(TextView) v.findViewById(R.id.rs);
 
-
-        item.setText(menu.get(position).getName());
-        itemquantity.setText(String.valueOf(menu.get(position).getQuantity()));
-        itemprice.setText(String.valueOf(menu.get(position).getPrice()));
-
+        holder.item.setText(menu.get(position).getName());
+        holder.itemquantity.setText(String.valueOf(menu.get(position).getQuantity()));
+        holder.itemprice.setText(String.valueOf(menu.get(position).getPrice()));
 
         return v;
+    }
+    class ViewHolder{
+        private TextView item, itemquantity,itemprice;
+
+
     }
 }
