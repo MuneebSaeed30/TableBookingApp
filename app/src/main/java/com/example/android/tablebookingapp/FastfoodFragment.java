@@ -64,4 +64,9 @@ public class FastfoodFragment extends Fragment {
         return v;
 
     }
+    public static FastfoodFragment getInstance(){
+
+        FastfoodFragment iF = new FastfoodFragment();
+        return iF;
+    }
 }

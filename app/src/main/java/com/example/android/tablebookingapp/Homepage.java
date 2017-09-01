@@ -123,14 +123,16 @@ public class Homepage extends AppCompatActivity
 
             Menu1Fragment menu1Fragment = new Menu1Fragment();
             FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_layout, menu1Fragment, menu1Fragment.getTag())
+            manager.beginTransaction().replace(R.id.content_layout,menu1Fragment,menu1Fragment.getTag())
                     .addToBackStack(null)
                     .commit();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
             SeatFragment seatFragment = new SeatFragment();
             FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_layout, seatFragment , seatFragment.getTag()).commit();
+            manager.beginTransaction().replace(R.id.content_layout, seatFragment , seatFragment.getTag())
+                    .addToBackStack(null)
+                    .commit();
 
 
         } else if (id == R.id.nav_slideshow) {

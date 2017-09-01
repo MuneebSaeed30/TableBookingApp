@@ -63,4 +63,10 @@ public class ItalianFragment extends Fragment {
         return v;
 
     }
+
+    public static ItalianFragment getInstance(){
+
+        ItalianFragment iF = new ItalianFragment();
+        return iF;
+    }
 }

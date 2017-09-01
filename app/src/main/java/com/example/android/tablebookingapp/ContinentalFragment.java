@@ -61,5 +61,10 @@ public class ContinentalFragment extends Fragment {
         return v;
     }
 
+    public static ContinentalFragment getInstance(){
+
+        ContinentalFragment iF = new ContinentalFragment();
+        return iF;
+    }
 
 }

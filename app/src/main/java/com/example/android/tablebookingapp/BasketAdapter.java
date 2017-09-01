@@ -6,33 +6,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class BasketAdapter extends BaseAdapter {
+import model.CartItems;
+
+public class BasketAdapter extends ArrayAdapter<CartItems> {
     private Activity activity;
     private LayoutInflater inflater;
-    private ArrayList<Menu> menu= new ArrayList<>();
     private Context context;
+    ArrayList<CartItems>itemOnCart= new ArrayList<>();
 
-    public BasketAdapter(Context context) {
-        this.context = context;
-    }
 
-    public BasketAdapter(Context context , ArrayList<Menu> menu) {
 
+    public BasketAdapter(Context context, ArrayList<CartItems> itemOnCart) {
+        super(context,R.layout.layout_add_to_basket,itemOnCart);
         this.context= context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.menu = menu;
+        this.itemOnCart= itemOnCart;
+
     }
-
-    public BasketAdapter() {
-    }
-
-
-
 
 
 
@@ -40,12 +35,7 @@ public class BasketAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return menu.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return position;
+        return itemOnCart.size();
     }
 
     @Override
@@ -56,28 +46,30 @@ public class BasketAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-        View v=convertView;
+
         ViewHolder holder;
-        if(convertView==null) {
-            holder= new ViewHolder();
-            v = inflater.inflate(R.layout.layout_add_to_basket, null);
-            holder.item =(TextView) v.findViewById(R.id.itm);
-            holder.itemquantity =(TextView) v.findViewById(R.id.quan);
-            holder.itemprice =(TextView) v.findViewById(R.id.rs);
-            v.setTag(holder);
-        }else{
-            holder = (ViewHolder) v.getTag();
-        }
+
+            if(convertView==null) {
+                holder= new ViewHolder();
+                convertView = inflater.inflate(R.layout.layout_add_to_basket, null);
+                holder.item =(TextView) convertView.findViewById(R.id.itm);
+                holder.itemQuantity =(TextView) convertView.findViewById(R.id.quan);
+                holder.itemPrice =(TextView) convertView.findViewById(R.id.rs);
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder) convertView.getTag();
+            }
 
 
-        holder.item.setText(menu.get(position).getName());
-        holder.itemquantity.setText(String.valueOf(menu.get(position).getQuantity()));
-        holder.itemprice.setText(String.valueOf(menu.get(position).getPrice()));
+            holder.item.setText(itemOnCart.get(position).getItemName());
+            holder.itemQuantity.setText(String.valueOf(itemOnCart.get(position).getItemQuantity()));
+            holder.itemPrice.setText(String.valueOf(itemOnCart.get(position).getItemPrice()));
 
-        return v;
+        return convertView;
     }
-    class ViewHolder{
-        private TextView item, itemquantity,itemprice;
+
+    private static class ViewHolder{
+        private TextView item, itemQuantity,itemPrice;
 
 
     }

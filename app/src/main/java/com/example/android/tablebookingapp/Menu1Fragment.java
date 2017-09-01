@@ -2,64 +2,86 @@ package com.example.android.tablebookingapp;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+
+public class Menu1Fragment extends Fragment{
 
 
-public class Menu1Fragment extends Fragment  {
-
-    private RecyclerView recyclerView;
-    private List<com.example.android.tablebookingapp.Menu>  menu= new ArrayList<>();
-
-
-    public Menu1Fragment() {
-
-    }
-
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.fragment_menu1, container, false);
+        TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tabs);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mViewPager = (ViewPager) v.findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        return v;
+    }
 
-        View view=inflater.inflate(R.layout.fragment_menu1, container, false);
 
 
-        recyclerView= (RecyclerView) view.findViewById(R.id.FoodMenu);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this.getContext()));
-        Menu1Adapter menu1Adapter= new Menu1Adapter(menu,this.getContext());
-        recyclerView.setAdapter(menu1Adapter);
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        int[] covers = new int[]{
-                R.drawable.continental,
-                R.drawable.bbq,
-                R.drawable.chinese,
-                R.drawable.italian,
-                R.drawable.fastfood};
-        
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-	   Menu c1= new Menu("Continental","Handi, Karahi, Rogni Naan..",covers[0]);
-        menu.add(c1);
+        @Override
+        public Fragment getItem(int position) {
+            switch (position){
+                case 0:
+                    return ContinentalFragment.getInstance();
 
-        Menu c2= new Menu("BarBQ","Chargha, Tikka, Seekh Kabab..",covers[1]);
-        menu.add(c2);
+                case 1:
+                    return ChineseFragment.getInstance();
 
-        Menu c3= new Menu("Chinese","Chowmein, Singaporian Rice..",covers[2]);
-        menu.add(c3);
+                case 2:
+                    return BbqFragment.getInstance();
 
-        Menu c4= new Menu("Italian","Pizza, Lasagne..",covers[3]);
-        menu.add(c4);
+                case 3:
+                    return FastfoodFragment.getInstance();
 
-        Menu c5= new Menu("FastFood","Beef Cheese Burger, Zinger Stacker..",covers[4]);
-        menu.add(c5);
-        return view;
+                case 4:
+                    return ItalianFragment.getInstance();
+
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position){
+            switch (position) {
+                case 0:
+                    return "Continental";
+                case 1:
+                    return "Chinese";
+                case 2:
+                    return "Bbq";
+                case 3:
+                    return "Fastfood";
+                case 4:
+                    return "Italian";
+            }
+            return null;
+        }
     }
 
 

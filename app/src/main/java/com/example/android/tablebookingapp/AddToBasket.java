@@ -6,26 +6,28 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import model.CartItems;
+
 public class AddToBasket extends Fragment {
     private ListView lv;
-    private ArrayList<Menu> menu= new ArrayList<Menu>();
     private Button btnShop, btnCheckout;
-    String itemname;
-    int itemquan, itemrs;
-    Bundle bundle1;
-    private ArrayAdapter<Menu> adapter;
     BasketAdapter basketadapter;
+    ArrayList<CartItems> itemOnCart;
+    int total=0;
+
+
 
 
 
@@ -41,28 +43,35 @@ public class AddToBasket extends Fragment {
                              Bundle savedInstanceState) {
          View v=inflater.inflate(R.layout.fragment_add_to_basket, container, false);
 
+        final ArrayList<CartItems> itemOnCart= (ArrayList<CartItems>)getArguments().getSerializable("CartItems");
+        TextView tp= (TextView) v.findViewById(R.id.total);
 
 
-        bundle1= getArguments();
-        itemname=bundle1.getString("item");
-        itemquan=bundle1.getInt("itemquantity");
-        itemrs=bundle1.getInt("itemprice");
-
-        basketadapter= new BasketAdapter(this.getActivity(),menu);
+        basketadapter= new BasketAdapter(this.getActivity(),itemOnCart);
         lv= (ListView) v.findViewById(R.id.lv);
         lv.setAdapter(basketadapter);
-        Menu c1=new Menu(itemname,itemquan,itemrs);
-        addItem(c1);
+        for(int m=0; m<itemOnCart.size(); m++){
+            // Toast.makeText(this.getContext(),itemOnCart.get(m).getItemName() ,Toast.LENGTH_LONG).show();
+            Log.i("test",itemOnCart.get(m).getItemName());
+            Log.i("test",itemOnCart.get(m).getItemQuantity());
+            Log.i("test",itemOnCart.get(m).getItemPrice());
 
-        //basketadapter.SetModel(menu);
+            total=total+ Integer.valueOf(itemOnCart.get(m).getItemPrice());
 
+
+                /*System.out.println(itemOnCart.get(m).getItemName());
+                System.out.println(itemOnCart.get(m).getItemQuantity());
+                System.out.println(itemOnCart.get(m).getItemPrice());*/
+            }
+
+        tp.setText(String.valueOf(total));
 
         btnShop = (Button) v.findViewById(R.id.shopping);
         btnCheckout = (Button) v.findViewById(R.id.checkout);
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int position , long l) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position , long l) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(false);
                 builder.setTitle("Delete Item");
@@ -71,6 +80,9 @@ public class AddToBasket extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                itemOnCart.remove(position);
+                                basketadapter.notifyDataSetChanged();
+
                                 Toast.makeText(getContext(),"Item Deleted", Toast.LENGTH_LONG).show();
 
 
@@ -95,9 +107,12 @@ public class AddToBasket extends Fragment {
         btnShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 Menu1Fragment menu1Fragment = new Menu1Fragment();
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.content_layout, menu1Fragment, menu1Fragment.getTag())
+                manager.beginTransaction().replace(R.id.content_layout, menu1Fragment,menu1Fragment.getTag())
                         .addToBackStack(null)
                         .commit();
             }
@@ -128,16 +143,6 @@ public class AddToBasket extends Fragment {
 
         return v;
     }
-
-    public void addItem(Menu item){
-
-        menu.add(item);
-        basketadapter.notifyDataSetChanged();
-    }
-
-
-
-
 
 
 

@@ -61,4 +61,9 @@ public class ChineseFragment extends Fragment {
         return v;
 
     }
+    public static ChineseFragment getInstance(){
+
+        ChineseFragment iF = new ChineseFragment();
+        return iF;
+    }
 }

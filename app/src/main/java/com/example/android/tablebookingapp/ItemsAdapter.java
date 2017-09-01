@@ -12,18 +12,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import model.CartItems;
 
 public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder> {
 
 
     private List<Menu> menu;
+
     private Context context;
-    int minteger = 1;
-    int i=1;
+    int minteger = 0;
+    int i=0;
+    public ArrayList<CartItems> itemOnCart= new ArrayList<>();
 
     public ItemsAdapter(List<Menu> menu, Context context) {
         this.menu = menu;
@@ -86,6 +92,8 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder>
         }
 
 
+
+
         @Override
         public void onClick(View view) {
 
@@ -98,19 +106,31 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder>
                 i=decreaseInteger();
                 catQuantity.setText(String.valueOf(i));
 
-            }else if (view.getId() == btnCart.getId()) {
+            } else if (view.getId() == btnCart.getId()) {
 
                 AppCompatActivity activity = (AppCompatActivity) view.getRootView().getContext();
-                AddToBasket atb= new AddToBasket();
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("item",menu.get(getAdapterPosition()).getName() );
-                bundle1.putInt("itemquantity", i);
-                bundle1.putInt("itemprice",menu.get(getAdapterPosition()).getPrice()*i);
+                CartItems cartItems =new CartItems();
+                cartItems.setItemName(menu.get(getAdapterPosition()).getName());
+                cartItems.setItemQuantity(String.valueOf(i));
+                int a=menu.get(getAdapterPosition()).getPrice();
+                int price= a*i;
+                cartItems.setItemPrice(String.valueOf(price));
+                itemOnCart.add(cartItems);
+                Bundle bundle1= new Bundle();
+               bundle1.putSerializable("CartItems",itemOnCart);
+                 /*AddToBasket atb= new AddToBasket();
                 atb.setArguments(bundle1);
                 FragmentManager manager= activity.getSupportFragmentManager();
-                manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();
+                manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();*/
 
-                //Toast.makeText(view.getContext() , "Added To Cart" , Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext() , "Added To Cart" , Toast.LENGTH_LONG).show();
+                if(itemOnCart.size()==3){
+                    AddToBasket atb= new AddToBasket();
+                    atb.setArguments(bundle1);
+                    FragmentManager manager= activity.getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();
+
+                }
 
 
             }

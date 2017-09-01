@@ -63,6 +63,12 @@ public class BbqFragment extends Fragment {
         return v;
     }
 
+    public static BbqFragment getInstance(){
+
+        BbqFragment iF = new BbqFragment();
+        return iF;
+    }
+
 
 
 
