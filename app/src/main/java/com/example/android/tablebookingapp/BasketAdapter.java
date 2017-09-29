@@ -17,7 +17,7 @@ public class BasketAdapter extends ArrayAdapter<CartItems> {
     private Activity activity;
     private LayoutInflater inflater;
     private Context context;
-    ArrayList<CartItems>itemOnCart= new ArrayList<>();
+    static ArrayList<CartItems>itemOnCart= new ArrayList<>();
 
 
 

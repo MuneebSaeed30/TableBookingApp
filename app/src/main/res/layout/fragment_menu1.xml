@@ -47,7 +47,11 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_name"
-        android:clickable="true" />
+        android:clickable="true"
+        app:elevation="0dp"
+        android:cropToPadding="true"
+        android:adjustViewBounds="false"
+        android:baselineAlignBottom="false" />
 
 
 

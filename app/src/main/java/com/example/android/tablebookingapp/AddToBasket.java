@@ -16,6 +16,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 import model.CartItems;
@@ -24,8 +29,12 @@ public class AddToBasket extends Fragment {
     private ListView lv;
     private Button btnShop, btnCheckout;
     BasketAdapter basketadapter;
-    ArrayList<CartItems> itemOnCart;
-    int total=0;
+    public TextView tp;
+     int total=0;
+    int i=0;
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth nAuth;
+
 
 
 
@@ -42,9 +51,10 @@ public class AddToBasket extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          View v=inflater.inflate(R.layout.fragment_add_to_basket, container, false);
+        nAuth = FirebaseAuth.getInstance();
 
         final ArrayList<CartItems> itemOnCart= (ArrayList<CartItems>)getArguments().getSerializable("CartItems");
-        TextView tp= (TextView) v.findViewById(R.id.total);
+          tp= (TextView) v.findViewById(R.id.total);
 
 
         basketadapter= new BasketAdapter(this.getActivity(),itemOnCart);
@@ -57,11 +67,6 @@ public class AddToBasket extends Fragment {
             Log.i("test",itemOnCart.get(m).getItemPrice());
 
             total=total+ Integer.valueOf(itemOnCart.get(m).getItemPrice());
-
-
-                /*System.out.println(itemOnCart.get(m).getItemName());
-                System.out.println(itemOnCart.get(m).getItemQuantity());
-                System.out.println(itemOnCart.get(m).getItemPrice());*/
             }
 
         tp.setText(String.valueOf(total));
@@ -80,7 +85,9 @@ public class AddToBasket extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                total=total- Integer.valueOf(itemOnCart.get(position).getItemPrice());
                                 itemOnCart.remove(position);
+                                tp.setText(String.valueOf(total));
                                 basketadapter.notifyDataSetChanged();
 
                                 Toast.makeText(getContext(),"Item Deleted", Toast.LENGTH_LONG).show();
@@ -121,6 +128,28 @@ public class AddToBasket extends Fragment {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Add It To Firebase
+
+                FirebaseUser user = nAuth.getCurrentUser();
+                DatabaseReference usersRef1 = ref.child("Orders");
+                DatabaseReference usersRef2 = usersRef1.child("Order No: "+ ++i);
+                DatabaseReference usersRef3 = usersRef2.child("Items");
+
+                DatabaseReference newUserRef2 = usersRef2.push();
+                newUserRef2.setValue(user.getUid());
+
+
+                for(int oi=0; oi<itemOnCart.size(); oi++){
+                    Order order = new Order(user.getUid(),itemOnCart.get(oi).getItemName()
+                            ,itemOnCart.get(oi).getItemQuantity());
+                    DatabaseReference newUserRef3 = usersRef3.push();
+                    newUserRef3.setValue(order);
+
+                }
+
+
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(false);
                 builder.setTitle("Check Out");

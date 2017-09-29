@@ -53,6 +53,9 @@ public class Homepage extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+
+
+
         nAuth = FirebaseAuth.getInstance();
         nProgressDialog = new ProgressDialog(this);
 
@@ -175,6 +178,7 @@ public class Homepage extends AppCompatActivity
     @Override
     protected void onStart() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         mGoogleApiClient.connect();
         super.onStart();
     }

@@ -17,16 +17,30 @@ public class Menu1Fragment extends Fragment{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    Bundle bundle1=new Bundle();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        bundle1.getSerializable("CartItem");
         View v=inflater.inflate(R.layout.fragment_menu1, container, false);
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tabs);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
         mViewPager = (ViewPager) v.findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+       /* FloatingActionButton fab= (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddToBasket atb= new AddToBasket();
+                atb.setArguments(bundle1);
+                FragmentManager manager= getFragmentManager();
+                manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();
+
+            }
+        });*/
         return v;
     }
 

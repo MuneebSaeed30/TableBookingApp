@@ -17,21 +17,21 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import model.CartItems;
 
 public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder> {
 
 
-    private List<Menu> menu;
+    private ArrayList<Menu> menu;
 
     private Context context;
     int minteger = 0;
     int i=0;
-    public ArrayList<CartItems> itemOnCart= new ArrayList<>();
+    static ArrayList<CartItems> itemOnCart= new ArrayList<>();
 
-    public ItemsAdapter(List<Menu> menu, Context context) {
+
+    public ItemsAdapter(ArrayList<Menu> menu, Context context) {
         this.menu = menu;
         this.context = context;
     }
@@ -47,11 +47,12 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Menu menus = menu.get(position);
+        int m=0;
 
         holder.catName.setText(menus.getName());
         holder.catDesc.setText(menus.getDiscription());
         holder.catPrice.setText(String.valueOf(menus.getPrice()));
-        holder.catQuantity.setText(String.valueOf(minteger));
+        holder.catQuantity.setText(String.valueOf(m));
         Picasso.with(context)
                 .load(menus.getImage())
                 .placeholder(R.drawable.logo)
@@ -99,49 +100,52 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ViewHolder>
 
             if (view.getId() == inc.getId()) {
 
-                 i= increaseInteger();
+                minteger= Integer.valueOf(catQuantity.getText().toString());
+                i= increaseInteger();
                 catQuantity.setText(String.valueOf(i));
 
             } else if (view.getId() == dec.getId()) {
+                minteger= Integer.valueOf(catQuantity.getText().toString());
                 i=decreaseInteger();
                 catQuantity.setText(String.valueOf(i));
+
 
             } else if (view.getId() == btnCart.getId()) {
 
                 AppCompatActivity activity = (AppCompatActivity) view.getRootView().getContext();
                 CartItems cartItems =new CartItems();
                 cartItems.setItemName(menu.get(getAdapterPosition()).getName());
-                cartItems.setItemQuantity(String.valueOf(i));
-                int a=menu.get(getAdapterPosition()).getPrice();
-                int price= a*i;
-                cartItems.setItemPrice(String.valueOf(price));
-                itemOnCart.add(cartItems);
-                Bundle bundle1= new Bundle();
-               bundle1.putSerializable("CartItems",itemOnCart);
+                    cartItems.setItemQuantity(String.valueOf(i));
+                    int a=menu.get(getAdapterPosition()).getPrice();
+                    int price= a*i;
+                    cartItems.setItemPrice(String.valueOf(price));
+                    itemOnCart.add(cartItems);
+                    Bundle bundle1= new Bundle();
+                    bundle1.putSerializable("CartItems",itemOnCart);
+                    //minteger=0;
+
                  /*AddToBasket atb= new AddToBasket();
                 atb.setArguments(bundle1);
                 FragmentManager manager= activity.getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();*/
 
-                Toast.makeText(view.getContext() , "Added To Cart" , Toast.LENGTH_LONG).show();
-                if(itemOnCart.size()==3){
-                    AddToBasket atb= new AddToBasket();
-                    atb.setArguments(bundle1);
-                    FragmentManager manager= activity.getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();
+                    Toast.makeText(view.getContext() , "Added To Cart" , Toast.LENGTH_LONG).show();
+                    if(itemOnCart.size()>2){
+                        AddToBasket atb= new AddToBasket();
+                        atb.setArguments(bundle1);
+                        FragmentManager manager= activity.getSupportFragmentManager();
+                        manager.beginTransaction().replace(R.id.content_layout, atb, atb.getTag()).commit();
+                    }else{}
 
                 }
-
 
             }
 
         }
 
 
-    }
-
-
     public int increaseInteger() {
+
         minteger = minteger + 1;
         return minteger;
     }
